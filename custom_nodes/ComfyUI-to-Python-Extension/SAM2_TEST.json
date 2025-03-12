@@ -1,0 +1,545 @@
+{
+  "last_node_id": 12,
+  "last_link_id": 13,
+  "nodes": [
+    {
+      "id": 10,
+      "type": "Sam2VideoSegmentation",
+      "pos": [
+        1827.483642578125,
+        275.29437255859375
+      ],
+      "size": [
+        315,
+        78
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "sam2_model",
+          "type": "SAM2MODEL",
+          "link": 9,
+          "localized_name": "sam2_model"
+        },
+        {
+          "name": "inference_state",
+          "type": "SAM2INFERENCESTATE",
+          "link": 10,
+          "localized_name": "inference_state"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "mask",
+          "type": "MASK",
+          "links": [
+            11
+          ],
+          "localized_name": "mask"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Sam2VideoSegmentation"
+      },
+      "widgets_values": [
+        true
+      ]
+    },
+    {
+      "id": 4,
+      "type": "DownloadAndLoadSAM2Model",
+      "pos": [
+        602.4168090820312,
+        -176.4176788330078
+      ],
+      "size": [
+        315,
+        130
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "sam2_model",
+          "type": "SAM2MODEL",
+          "links": [
+            3
+          ],
+          "slot_index": 0,
+          "localized_name": "sam2_model"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DownloadAndLoadSAM2Model"
+      },
+      "widgets_values": [
+        "sam2_hiera_base_plus.safetensors",
+        "video",
+        "cuda",
+        "fp16"
+      ]
+    },
+    {
+      "id": 11,
+      "type": "ImageAndMaskPreview",
+      "pos": [
+        2048.6767578125,
+        -207.1514434814453
+      ],
+      "size": [
+        315,
+        126
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 12,
+          "shape": 7,
+          "localized_name": "image"
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 11,
+          "shape": 7,
+          "localized_name": "mask"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "composite",
+          "type": "IMAGE",
+          "links": [
+            13
+          ],
+          "localized_name": "composite"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageAndMaskPreview"
+      },
+      "widgets_values": [
+        0.8,
+        "255, 255, 255",
+        false
+      ]
+    },
+    {
+      "id": 7,
+      "type": "Sam2VideoSegmentationAddPoints",
+      "pos": [
+        1274.995361328125,
+        17.4232177734375
+      ],
+      "size": [
+        456,
+        170
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "sam2_model",
+          "type": "SAM2MODEL",
+          "link": 3,
+          "localized_name": "sam2_model"
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 6,
+          "shape": 7,
+          "localized_name": "image"
+        },
+        {
+          "name": "prev_inference_state",
+          "type": "SAM2INFERENCESTATE",
+          "link": null,
+          "shape": 7,
+          "localized_name": "prev_inference_state"
+        },
+        {
+          "name": "coordinates_positive",
+          "type": "STRING",
+          "link": 4,
+          "widget": {
+            "name": "coordinates_positive"
+          }
+        },
+        {
+          "name": "coordinates_negative",
+          "type": "STRING",
+          "link": 5,
+          "widget": {
+            "name": "coordinates_negative"
+          },
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "sam2_model",
+          "type": "SAM2MODEL",
+          "links": [
+            9
+          ],
+          "slot_index": 0,
+          "localized_name": "sam2_model"
+        },
+        {
+          "name": "inference_state",
+          "type": "SAM2INFERENCESTATE",
+          "links": [
+            10
+          ],
+          "slot_index": 1,
+          "localized_name": "inference_state"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Sam2VideoSegmentationAddPoints"
+      },
+      "widgets_values": [
+        "",
+        0,
+        0,
+        ""
+      ]
+    },
+    {
+      "id": 12,
+      "type": "VHS_VideoCombine",
+      "pos": [
+        2565.65380859375,
+        65.20282745361328
+      ],
+      "size": [
+        218.82891845703125,
+        334
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 13,
+          "localized_name": "images"
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": null,
+          "shape": 7,
+          "localized_name": "audio"
+        },
+        {
+          "name": "meta_batch",
+          "type": "VHS_BatchManager",
+          "link": null,
+          "shape": 7,
+          "localized_name": "meta_batch"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null,
+          "shape": 7,
+          "localized_name": "vae"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null,
+          "localized_name": "Filenames"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 8,
+        "loop_count": 0,
+        "filename_prefix": "AnimateDiff",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "trim_to_audio": false,
+        "pingpong": false,
+        "save_output": true,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {}
+        }
+      }
+    },
+    {
+      "id": 8,
+      "type": "PointsEditor",
+      "pos": [
+        531.3184814453125,
+        228.08551025390625
+      ],
+      "size": [
+        557,
+        812
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "bg_image",
+          "type": "IMAGE",
+          "link": null,
+          "shape": 7,
+          "localized_name": "bg_image"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive_coords",
+          "type": "STRING",
+          "links": [
+            4
+          ],
+          "localized_name": "positive_coords"
+        },
+        {
+          "name": "negative_coords",
+          "type": "STRING",
+          "links": [
+            5
+          ],
+          "slot_index": 1,
+          "localized_name": "negative_coords"
+        },
+        {
+          "name": "bbox",
+          "type": "BBOX",
+          "links": null,
+          "localized_name": "bbox"
+        },
+        {
+          "name": "bbox_mask",
+          "type": "MASK",
+          "links": [],
+          "slot_index": 3,
+          "localized_name": "bbox_mask"
+        },
+        {
+          "name": "cropped_image",
+          "type": "IMAGE",
+          "links": null,
+          "localized_name": "cropped_image"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PointsEditor"
+      },
+      "widgets_values": [
+        "{\"positive\":[{\"x\":256,\"y\":256}],\"negative\":[{\"x\":0,\"y\":0}]}",
+        "[{\"x\":256,\"y\":256}]",
+        "[{\"x\":0,\"y\":0}]",
+        "[{}]",
+        "[{}]",
+        "xyxy",
+        512,
+        512,
+        false,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": 3,
+      "type": "VHS_LoadVideo",
+      "pos": [
+        120.23477172851562,
+        -1.4806073904037476
+      ],
+      "size": [
+        251.52520751953125,
+        310
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "meta_batch",
+          "type": "VHS_BatchManager",
+          "link": null,
+          "shape": 7,
+          "localized_name": "meta_batch"
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null,
+          "shape": 7,
+          "localized_name": "vae"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            6,
+            12
+          ],
+          "localized_name": "IMAGE"
+        },
+        {
+          "name": "frame_count",
+          "type": "INT",
+          "links": null,
+          "localized_name": "frame_count"
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": null,
+          "localized_name": "audio"
+        },
+        {
+          "name": "video_info",
+          "type": "VHS_VIDEOINFO",
+          "links": null,
+          "localized_name": "video_info"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_LoadVideo"
+      },
+      "widgets_values": {
+        "force_rate": 0,
+        "custom_width": 0,
+        "custom_height": 0,
+        "frame_load_cap": 0,
+        "skip_first_frames": 0,
+        "select_every_nth": 1,
+        "format": "AnimateDiff",
+        "choose video to upload": "image",
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "force_rate": 0,
+            "custom_width": 0,
+            "custom_height": 0,
+            "frame_load_cap": 0,
+            "skip_first_frames": 0,
+            "select_every_nth": 1
+          }
+        }
+      }
+    }
+  ],
+  "links": [
+    [
+      3,
+      4,
+      0,
+      7,
+      0,
+      "SAM2MODEL"
+    ],
+    [
+      4,
+      8,
+      0,
+      7,
+      3,
+      "STRING"
+    ],
+    [
+      5,
+      8,
+      1,
+      7,
+      4,
+      "STRING"
+    ],
+    [
+      6,
+      3,
+      0,
+      7,
+      1,
+      "IMAGE"
+    ],
+    [
+      9,
+      7,
+      0,
+      10,
+      0,
+      "SAM2MODEL"
+    ],
+    [
+      10,
+      7,
+      1,
+      10,
+      1,
+      "SAM2INFERENCESTATE"
+    ],
+    [
+      11,
+      10,
+      0,
+      11,
+      1,
+      "MASK"
+    ],
+    [
+      12,
+      3,
+      0,
+      11,
+      0,
+      "IMAGE"
+    ],
+    [
+      13,
+      11,
+      0,
+      12,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5644739300537778,
+      "offset": [
+        802.4569593406245,
+        646.4382232573151
+      ]
+    },
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}
