@@ -29,7 +29,7 @@ except ImportError:
 # Prevent reimporting of custom nodes
 os.environ["RUNNING_IN_COMFYUI"] = "TRUE"
 
-from comfyui_to_python import ComfyUItoPython
+from convert_comfyui import ComfyUItoPython
 
 sys.path.append(os.path.dirname(os.path.dirname(ext_dir)))
 

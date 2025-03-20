@@ -200,11 +200,11 @@ if __name__ == "__main__":
 
 6a. Run the script with default arguments:
    ```bash
-   python comfyui_to_python.py
+   python convert_comfyui.py
    ```
 6b. Run the script with optional arguments:
    ```bash
-   python comfyui_to_python.py --input_file "workflow_api (2).json" --output_file my_workflow.py --queue_size 100
+   python convert_comfyui.py --input_file "workflow_api (2).json" --output_file my_workflow.py --queue_size 100
    ```
 
 7. After running `comfyui_to_python.py`, a new .py file will be created in the current working directory. If you made no changes, look for `workflow_api.py`.

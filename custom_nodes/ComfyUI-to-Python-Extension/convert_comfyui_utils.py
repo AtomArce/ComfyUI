@@ -58,7 +58,7 @@ def add_comfyui_directory_to_sys_path() -> None:
     """
     comfyui_path = find_path("ComfyUI")
     if comfyui_path is not None and os.path.isdir(comfyui_path):
-        sys.path.append(comfyui_path)
+        sys.path.insert(0, comfyui_path)
         print(f"'{comfyui_path}' added to sys.path")
 
 
@@ -66,21 +66,21 @@ def add_extra_model_paths() -> None:
     """
     Parse the optional extra_model_paths.yaml file and add the parsed paths to the sys.path.
     """
+    # print(f"DEBUG: Before looking for load_extra_path_config sys.path: {sys.path}")
     try:
         from main import load_extra_path_config
-    except ImportError:
+    except ImportError as e:
         print(
-            "Could not import load_extra_path_config from main.py. Looking in utils.extra_config instead."
+            "Could not import load_extra_path_config from main.py. Looking in Comfyui_utils.extra_config instead."
         )
-        from utils.extra_config import load_extra_path_config
-
+        from Comfyui_utils.extra_config import load_extra_path_config
     extra_model_paths = find_path("extra_model_paths.yaml")
 
     if extra_model_paths is not None:
         load_extra_path_config(extra_model_paths)
     else:
         print("Could not find the extra_model_paths config file.")
-
+    print(f"DEBUG Found extra_model_paths: {extra_model_paths}")
 
 def get_value_at_index(obj: Union[Sequence, Mapping], index: int) -> Any:
     """Returns the value at the given index of a sequence or mapping.
@@ -104,3 +104,4 @@ def get_value_at_index(obj: Union[Sequence, Mapping], index: int) -> Any:
         return obj[index]
     except KeyError:
         return obj["result"][index]
+

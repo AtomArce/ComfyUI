@@ -4,7 +4,7 @@ import os
 import sys
 from unittest.mock import Mock, patch, mock_open
 
-from utils.extra_config import load_extra_path_config
+from Comfyui_utils.extra_config import load_extra_path_config
 import folder_paths
 
 

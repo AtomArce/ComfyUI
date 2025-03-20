@@ -1,4 +1,4 @@
-from utils.json_util import merge_json_recursive
+from Comfyui_utils.json_util import merge_json_recursive
 
 
 def test_merge_simple_dicts():

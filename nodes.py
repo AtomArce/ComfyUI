@@ -2174,6 +2174,7 @@ def init_external_custom_nodes():
     """
     base_node_names = set(NODE_CLASS_MAPPINGS.keys())
     node_paths = folder_paths.get_folder_paths("custom_nodes")
+    print(f"found custom_nodes paths: {node_paths}")
     node_import_times = []
     for custom_node_path in node_paths:
         possible_modules = os.listdir(os.path.realpath(custom_node_path))
