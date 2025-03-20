@@ -1,0 +1,3 @@
+[submodule "custom_nodes/ComfyUI_SAMURAI_SAM2_"]
+	path = custom_nodes/ComfyUI_SAMURAI_SAM2_
+	url = git@github.com:AtomArce/ComfyUI-SAMURAI--SAM2-.git
