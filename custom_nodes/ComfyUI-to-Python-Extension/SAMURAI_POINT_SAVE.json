@@ -1,0 +1,69 @@
+{
+  "10": {
+    "inputs": {
+      "filepath": "/maker/jobs/virginiadmv_ducklings/work/VDU/VDU_sh140/publish/plates/VDU_sh140_raw_v004/VDU_sh140_raw_v004.%04d.exr",
+      "tonemap": "sRGB",
+      "start_frame": 1001,
+      "end_frame": 1046
+    },
+    "class_type": "LoadEXRFrames",
+    "_meta": {
+      "title": "Load EXR Frames"
+    }
+  },
+  "24": {
+    "inputs": {
+      "model_name": "sam2.1_hiera_large.safetensors",
+      "resolution": "Full",
+      "iou_threshold": 0.1,
+      "smooth_mask": true,
+      "image": [
+        "10",
+        0
+      ],
+      "points": [
+        "35",
+        0
+      ],
+      "labels": [
+        "35",
+        1
+      ],
+      "start_frame": [
+        "35",
+        2
+      ]
+    },
+    "class_type": "SAMURAIRefineNode",
+    "_meta": {
+      "title": "SAMURAI Refine"
+    }
+  },
+  "27": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "24",
+        1
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "35": {
+    "inputs": {
+      "start_frame": 0,
+      "refresh_input": 0,
+      "image": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "SAMURAIPointsInputNode",
+    "_meta": {
+      "title": "SAMURAI Points Input"
+    }
+  }
+}
